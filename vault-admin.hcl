@@ -10,22 +10,71 @@ path "transit/*"
   capabilities = ["create", "read", "update", "delete", "list", "sudo"]
 }
 
-# Create, update, and delete auth methods
-path "sys/auth/*"
+# Audit devices
+path "sys/audit"
 {
   capabilities = ["create", "read", "update", "delete", "list", "sudo"]
 }
-
-# Lookup self
-path "sys/capabilities-self"
+path "sys/audit-hash"
 {
-  capabilities = ["create", "read", "update", "list"]
+  capabilities = ["create", "read", "update", "delete", "list", "sudo"]
 }
 
 # List auth methods
 path "sys/auth"
 {
   capabilities = ["read"]
+}
+
+# Create, update, and delete auth methods
+path "sys/auth/*"
+{
+  capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+}
+
+# Lookup self and capabilities
+path "sys/capabilities"
+{
+  capabilities = ["read", "list"]
+}
+
+path "sys/capabilities-accessor"
+{
+  capabilities = ["read", "list"]
+}
+
+path "sys/capabilities-self"
+{
+  capabilities = ["create", "read", "update", "list"]
+}
+
+# Ability to read system configuration, control groups, cors, reload, state, ui
+path "sys/config/*"
+{
+  capabilities = ["read", "update"]
+}
+
+# Modify system control groups
+path "sys/control-group" 
+{
+  capabilities = ["read", "update"]
+}
+
+# Generate a root token 
+path "sys/generate-root" 
+{
+  capabilities = ["read", "update"]
+}
+
+path "sys/generate-root/*" 
+{
+  capabilities = ["read", "update"]
+}
+
+# Access to namespaces [enterprise-only] 
+path "sys/namespaces/*" 
+{
+    capabilities = ["create", "read", "update", "delete", "list", "sudo"]
 }
 
 # Create and manage ACL policies
